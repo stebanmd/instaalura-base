@@ -16,8 +16,6 @@ export const TextStyleVariantsMap = {
   `,
 }
 
-
-
 const TextBase = styled.span`
   ${({ variant }) => TextStyleVariantsMap[variant]}
   ${propToStyle('textAlign')}
