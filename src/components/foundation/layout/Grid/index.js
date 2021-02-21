@@ -1,5 +1,6 @@
 import styled, { css } from 'styled-components'
 import { breakpointsMedia } from '../../../../theme/utils/breakpointsMedia'
+import { propToStyle } from '../../../../theme/utils/propToStyle';
 
 const Container = styled.div`
   width: 100%;
@@ -23,6 +24,8 @@ const Container = styled.div`
       max-width: 1222px;
     `
   })}
+
+  ${propToStyle('marginTop')}
 `
 
 const Col = styled.div`
@@ -31,6 +34,7 @@ const Col = styled.div`
   flex-basis: 0;
   flex-grow: 1;
   max-width: 100%;
+
   ${({ value }) => {
     if (typeof value === 'number') {
       return css`
@@ -71,6 +75,7 @@ const Col = styled.div`
       }),
     });
   }}
+
   ${({ offset }) => {
     if (typeof offset === 'number') {
       return css`
@@ -105,6 +110,11 @@ const Col = styled.div`
       }),
     });
   }}
+
+  ${propToStyle('display')}
+  ${propToStyle('alignItems')}
+  ${propToStyle('justifyContent')}
+  ${propToStyle('flexDirection')}  
 `;
 
 Col.defaultProps = {
