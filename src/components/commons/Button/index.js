@@ -4,7 +4,6 @@ import { TextStyleVariantsMap } from '../../foundation/Text';
 import { breakpointsMedia } from '../../../theme/utils/breakpointsMedia';
 import { propToStyle } from '../../../theme/utils/propToStyle';
 
-
 const ButtonGhost = css`
   color: ${({ theme, variant }) => get(theme, `colors.${variant}.color`)};
   background-color: transparent;
@@ -22,25 +21,27 @@ export const Button = styled.button`
   font-weight: bold;
   opacity: 1;
 
+  ${TextStyleVariantsMap.smallestException};
+  ${({ ghost }) => (ghost ? ButtonGhost : ButtonDefault)} 
+
   transition: opacity ${({ theme }) => theme.transition};
   border-radius: ${({ theme }) => theme.borderRadius};
-  ${({ ghost }) => (ghost ? ButtonGhost : ButtonDefault)} 
+
   &:hover,
   &:focus {
     opacity: .5;
   }
-
-  ${propToStyle('margin')}
-  ${propToStyle('display')}
 
   ${breakpointsMedia({
     xs: css`
       ${TextStyleVariantsMap.smallestException};
     `,
     md: css`
-      ${TextStyleVariantsMap.paragraph1};
-    
-    `
+      ${TextStyleVariantsMap.paragraph1};    
+    `,
   })}
 
-`
+  ${propToStyle('margin')}
+  ${propToStyle('display')}
+
+`;

@@ -15,7 +15,7 @@ const ModalWrapper = styled.div`
   margin: auto;
   overflow: scroll;
 
-  ${({isOpen}) => {
+  ${({ isOpen }) => {
     if (isOpen) {
       return css`
         opacity: 1;
@@ -27,8 +27,6 @@ const ModalWrapper = styled.div`
       pointer-events: none;
     `;
   }}
-
-
 `;
 
 export function Modal({ isOpen, onClose, children }) {

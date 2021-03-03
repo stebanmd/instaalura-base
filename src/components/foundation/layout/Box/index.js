@@ -1,5 +1,5 @@
-import styled from 'styled-components'
-import { propToStyle } from '../../../../theme/utils/propToStyle'
+import styled from 'styled-components';
+import { propToStyle } from '../../../../theme/utils/propToStyle';
 
 export const Box = styled.div`
   ${propToStyle('flex')}
@@ -11,4 +11,4 @@ export const Box = styled.div`
   ${propToStyle('backgroundRepeat')}
   ${propToStyle('backgroundPosition')}
   ${propToStyle('backgroundColor')}
-`
+`;

@@ -7,8 +7,6 @@ import { Text } from '../src/components/foundation/Text';
 import { Grid } from '../src/components/foundation/layout/Grid';
 import { Box } from '../src/components/foundation/layout/Box';
 
-
-
 export default function Home() {
   const [isModalOpen, setModalState] = React.useState(false);
 
@@ -25,6 +23,7 @@ export default function Home() {
     >
       <Modal isOpen={isModalOpen} onClose={() => setModalState(false)}>
         {(propsDoModal) => (
+          /* eslint-disable-next-line react/jsx-props-no-spreading */
           <Box backgroundColor="white" {...propsDoModal}>
             <p>test</p>
             <br />
