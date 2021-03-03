@@ -23,11 +23,15 @@ export default function Home() {
     >
       <Modal isOpen={isModalOpen} onClose={() => setModalState(false)}>
         {(propsDoModal) => (
-          /* eslint-disable-next-line react/jsx-props-no-spreading */
-          <Box backgroundColor="white" {...propsDoModal}>
-            <p>test</p>
-            <br />
-            <span>bbbb</span>
+          <Box
+            backgroundColor="white"
+            // eslint-disable-next-line react/jsx-props-no-spreading
+            {...propsDoModal}
+          >
+            <div>
+              Nosso conteudo
+            </div>
+
           </Box>
         )}
       </Modal>
