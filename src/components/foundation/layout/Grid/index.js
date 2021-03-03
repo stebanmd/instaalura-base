@@ -1,5 +1,5 @@
-import styled, { css } from 'styled-components'
-import { breakpointsMedia } from '../../../../theme/utils/breakpointsMedia'
+import styled, { css } from 'styled-components';
+import { breakpointsMedia } from '../../../../theme/utils/breakpointsMedia';
 import { propToStyle } from '../../../../theme/utils/propToStyle';
 
 const Container = styled.div`
@@ -22,11 +22,11 @@ const Container = styled.div`
     `,
     xl: css`
       max-width: 1222px;
-    `
+    `,
   })}
 
   ${propToStyle('marginTop')}
-`
+`;
 
 const Col = styled.div`
   padding-right: 16px;
@@ -130,5 +130,5 @@ export const Grid = {
     margin-right: -16px;
     margin-left: -16px;
   `,
-  Col
-}
+  Col,
+};

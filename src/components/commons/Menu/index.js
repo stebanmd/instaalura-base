@@ -1,25 +1,25 @@
-import React from 'react'
-import { Logo } from '../../../theme/Logo'
-import { MenuWrapper } from './styles/MenuWrapper'
-import {Button} from '../Button'
-import {Text} from '../../foundation/Text'
-
+import React from 'react';
+import { Logo } from '../../../theme/Logo';
+import { MenuWrapper } from './styles/MenuWrapper';
+import { Button } from '../Button';
+import { Text } from '../../foundation/Text';
 
 export default function Menu() {
   const links = [
     {
       text: 'Home',
-      url: '/'
+      url: '/',
     },
     {
       text: 'Perguntas Frequentes',
-      url: '/faq'
+      url: '/faq',
     },
     {
       text: 'Sobre',
-      url: '/about'
-    }
-  ]
+      url: '/about',
+    },
+  ];
+
   return (
     <MenuWrapper>
       <MenuWrapper.LeftSide>
@@ -28,9 +28,11 @@ export default function Menu() {
       <MenuWrapper.Central>
         {links.map((link) => (
           <li key={link.url}>
-            <Text tag="a"
-                  variant="smallestException"
-                  href={link.url}>
+            <Text
+              tag="a"
+              variant="smallestException"
+              href={link.url}
+            >
               {link.text}
             </Text>
           </li>
@@ -45,6 +47,5 @@ export default function Menu() {
         </Button>
       </MenuWrapper.RightSide>
     </MenuWrapper>
-  )
+  );
 }
-
