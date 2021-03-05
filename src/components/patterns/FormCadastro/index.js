@@ -1,14 +1,27 @@
 import React from 'react';
+import { Lottie } from '@crello/react-lottie';
+import successAnimation from './animations/success.json';
+import errorAnimation from './animations/error.json';
 import { Button } from '../../commons/Button';
 import TextField from '../../commons/TextField';
 import { Box } from '../../foundation/layout/Box';
 import { Grid } from '../../foundation/layout/Grid';
 import { Text } from '../../foundation/Text';
 
+const formStates = {
+  DEFAULT: 'DEFAULT',
+  LOADING: 'LOADING',
+  DONE: 'DONE',
+  ERROR: 'ERROR',
+};
+
 function FormContent() {
+  const [isFormSubmitted, setIsFormSubmitted] = React.useState(false);
+  const [submissionStatus, setSubmissionStatus] = React.useState(formStates.DEFAULT);
+
   const [userInfo, setUserInfo] = React.useState({
-    usuario: 'steban',
-    email: 'steban.md@gmail.com',
+    username: 'steban',
+    name: 'Steban Domingues',
   });
 
   function handleChange(event) {
@@ -19,13 +32,37 @@ function FormContent() {
     });
   }
 
-  const isFormInvalid = userInfo.usuario.length === 0 || userInfo.email.length === 0;
+  function handleSubmission(event) {
+    event.preventDefault();
+    setIsFormSubmitted(true);
+    setSubmissionStatus(formStates.LOADING);
+
+    fetch('https://instalura-api.vercel.app/api/users', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify(userInfo),
+    })
+      .then((res) => {
+        if (res.ok) {
+          return res.json();
+        }
+        throw new Error('Não foi possível cadastrar o usuário');
+      })
+      .then(() => {
+        setSubmissionStatus(formStates.DONE);
+      })
+      .catch(() => {
+        setSubmissionStatus(formStates.ERROR);
+      });
+  }
+
+  const isFormInvalid = userInfo.username.length === 0 || userInfo.name.length === 0;
 
   return (
     <form
-      onSubmit={(event) => {
-        event.preventDefault();
-      }}
+      onSubmit={handleSubmission}
     >
 
       <Text
@@ -47,9 +84,9 @@ function FormContent() {
 
       <div>
         <TextField
-          placeholder="Email"
-          name="email"
-          value={userInfo.email}
+          placeholder="Nome"
+          name="name"
+          value={userInfo.name}
           onChange={handleChange} // capturadores, pegadores de ação
         />
       </div>
@@ -57,8 +94,8 @@ function FormContent() {
       <div>
         <TextField
           placeholder="Usuário"
-          name="usuario"
-          value={userInfo.usuario}
+          name="username"
+          value={userInfo.username}
           onChange={handleChange}
         />
       </div>
@@ -71,6 +108,34 @@ function FormContent() {
       >
         Cadastrar
       </Button>
+
+      {isFormSubmitted && submissionStatus === formStates.DONE && (
+        <Box
+          display="flex"
+          justifyContent="center"
+        >
+          <Lottie
+            width="150px"
+            height="150px"
+            className="lottie-container basic"
+            config={{ animationData: successAnimation, loop: false, autoplay: true }}
+          />
+        </Box>
+      )}
+
+      {isFormSubmitted && submissionStatus === formStates.ERROR && (
+        <Box
+          display="flex"
+          justifyContent="center"
+        >
+          <Lottie
+            width="150px"
+            height="150px"
+            className="lottie-container basic"
+            config={{ animationData: errorAnimation, loop: false, autoplay: true }}
+          />
+        </Box>
+      )}
     </form>
 
   );
