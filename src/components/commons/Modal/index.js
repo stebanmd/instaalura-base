@@ -61,8 +61,7 @@ export function Modal({ isOpen, onClose, children }) {
         }}
         transition={{
           duration: 0.5,
-        }
-        }
+        }}
         animate={isOpen ? 'open' : 'closed'}
         style={{
           display: 'flex',
