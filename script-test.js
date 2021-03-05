@@ -1,5 +1,5 @@
 const shell = require('shelljs');
 
-shell.exec('git diff --name-only modulo2_aula5..main');
+const result = shell.exec('git diff --name-only modulo2_aula5..main', { silent: true });
 
-console.log('teste script');
+console.log('result', result);
