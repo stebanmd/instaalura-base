@@ -8,7 +8,7 @@ import { Box } from '../src/components/foundation/layout/Box';
 import FormCadastro from '../src/components/patterns/FormCadastro';
 
 export default function Home() {
-  const [isModalOpen, setModalState] = React.useState(false);
+      const [isModalOpen, setModalState] = React.useState(false);
 
   return (
     <Box
