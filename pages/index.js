@@ -28,7 +28,9 @@ export default function Home() {
         )}
       </Modal>
 
-      <Menu />
+      <Menu
+        onCadastrarClick={() => setModalState(!isModalOpen)}
+      />
 
       <Grid.Container
         marginTop={{ xs: '32px', md: '75px' }}
