@@ -1,9 +1,9 @@
 import React from 'react';
 
-export default function Faq() {
+export default function Login() {
   return (
     <div>
-      Perguntas Frequentes
+      Página de Login
     </div>
   );
 }
