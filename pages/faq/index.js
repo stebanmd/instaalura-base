@@ -4,7 +4,6 @@ import websitePageHOC from '../../src/components/wrappers/WebsitePage/hoc';
 
 function FaqPage({ faqCategories }) {
   return (
-    // eslint-disable-next-line react/jsx-props-no-spreading
     <FaqScreen faqCategories={faqCategories} />
   );
 }
