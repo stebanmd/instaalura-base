@@ -5,8 +5,6 @@ import TextField from '../../commons/TextField';
 import { useForm } from '../../../infra/hooks/forms/useForm';
 import { loginService } from '../../../services/login/loginService';
 
-
-
 export default function LoginForm() {
   const router = useRouter();
   const initialValues = {
@@ -20,11 +18,11 @@ export default function LoginForm() {
       loginService.login({
         username: values.usuario,
         password: values.senha,
-      }).then((res) => {
-        console.log(res);
+      }).then(() => {
+        // console.log(res);
         router.push('/app/profile');
-      }).catch((err) => {
-        console.error('erro aqui.', err);
+      }).catch(() => {
+        // console.error('erro aqui.', err);
       });
     },
   });
