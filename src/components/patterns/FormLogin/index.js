@@ -19,7 +19,6 @@ export default function LoginForm() {
         username: values.usuario,
         password: values.senha,
       }).then(() => {
-        // console.log(res);
         router.push('/app/profile');
       }).catch(() => {
         // console.error('erro aqui.', err);
