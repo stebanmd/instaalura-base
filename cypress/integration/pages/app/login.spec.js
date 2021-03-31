@@ -26,6 +26,4 @@ describe('/pages/app/login', () => {
       });
     });
   });
-
-
 });

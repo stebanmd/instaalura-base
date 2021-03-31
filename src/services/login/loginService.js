@@ -17,7 +17,6 @@ async function HttpClient(url, { headers, body, ...options }) {
   });
 }
 
-
 const BASE_URL = isStaging
   ? 'https://instalura-api-git-master-omariosouto.vercel.app/api/login'
   : 'https://instalura-api-git-master-omariosouto.vercel.app/api/login';
