@@ -22,8 +22,10 @@ const BASE_URL = isStaging
   : 'https://instalura-api-git-master-omariosouto.vercel.app/api/login';
 
 export const loginService = {
-  async login({ username, password }) {
-    return HttpClient(BASE_URL, {
+  async login({ username, password },
+    setCookieModule = setCookie,
+    HttpClientModule = HttpClient) {
+    return HttpClientModule(BASE_URL, {
       method: 'POST',
       body: {
         username,
@@ -31,15 +33,18 @@ export const loginService = {
       },
     }).then((res) => {
       const { token } = res.data;
+      if (!token) {
+        throw new Error('Failed to login');
+      }
       const DAY_IN_SECONDS = 86400;
-      setCookie(null, 'APP_TOKEN', token, {
+      setCookieModule(null, 'APP_TOKEN', token, {
         path: '/',
         maxAge: DAY_IN_SECONDS * 7, // 1 semana
       });
-      return res;
+      return { token };
     });
   },
-  logout() {
-    destroyCookie(null, 'APP_TOKEN');
+  async logout(destroyCookieModule = destroyCookie) {
+    destroyCookieModule(null, 'APP_TOKEN');
   },
 };
