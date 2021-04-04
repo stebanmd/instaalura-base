@@ -1,8 +1,7 @@
 import React from 'react';
 import user from '@testing-library/user-event';
-import { screen } from '@testing-library/react';
 import TextField from './index';
-import { render } from '../../../infra/test/testUtils';
+import { render, screen } from '../../../infra/test/testUtils';
 
 describe('<TextField />', () => {
   test('renders component', () => {

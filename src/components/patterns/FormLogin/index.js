@@ -15,7 +15,8 @@ const loginSchema = yup.object().shape({
     .required('Campo obrigatório'),
 });
 
-export default function LoginForm() {
+// eslint-disable-next-line react/prop-types
+export default function LoginForm({ onSubmit }) {
   const router = useRouter();
   const initialValues = {
     usuario: '',
@@ -32,6 +33,7 @@ export default function LoginForm() {
       }).then(() => {
         router.push('/app/profile');
       }).catch((err) => {
+        // eslint-disable-next-line no-console
         console.error('erro no login.', err);
       }).finally(() => form.setIsFormDisabled(false));
     },
@@ -43,7 +45,7 @@ export default function LoginForm() {
   });
 
   return (
-    <form id="formCadastro" onSubmit={form.handleSubmit}>
+    <form id="formCadastro" onSubmit={onSubmit || form.handleSubmit}>
       <TextField
         placeholder="Usuário"
         name="usuario"
