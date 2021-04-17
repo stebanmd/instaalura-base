@@ -1,25 +1,12 @@
 import { destroyCookie, setCookie } from 'nookies';
 import { isStaging } from '../../infra/env/isStagingEnv';
-
-async function HttpClient(url, { headers, body, ...options }) {
-  return fetch(url, {
-    headers: {
-      'Content-Type': 'application/json',
-      ...headers,
-    },
-    body: JSON.stringify(body),
-    ...options,
-  }).then((serverResponse) => {
-    if (serverResponse.ok) {
-      return serverResponse.json();
-    }
-    throw new Error('Falha ao recuperar os dados do servidor');
-  });
-}
+import { HttpClient } from '../../infra/http/HttpClient';
 
 const BASE_URL = isStaging
   ? 'https://instalura-api-git-master-omariosouto.vercel.app/api/login'
   : 'https://instalura-api-git-master-omariosouto.vercel.app/api/login';
+
+export const LOGIN_COOKIE_APP_TOKEN = 'LOGIN_COOKIE_APP_TOKEN';
 
 export const loginService = {
   async login({ username, password },
@@ -37,14 +24,14 @@ export const loginService = {
         throw new Error('Failed to login');
       }
       const DAY_IN_SECONDS = 86400;
-      setCookieModule(null, 'APP_TOKEN', token, {
+      setCookieModule(null, LOGIN_COOKIE_APP_TOKEN, token, {
         path: '/',
         maxAge: DAY_IN_SECONDS * 7, // 1 semana
       });
       return { token };
     });
   },
-  async logout(destroyCookieModule = destroyCookie) {
-    destroyCookieModule(null, 'APP_TOKEN');
+  async logout(ctx, destroyCookieModule = destroyCookie) {
+    destroyCookieModule(ctx, LOGIN_COOKIE_APP_TOKEN, { path: '/' });
   },
 };
