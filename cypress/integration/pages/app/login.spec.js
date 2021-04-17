@@ -1,5 +1,6 @@
 /// <reference types="cypress" />
 import LoginScreenPageObject from '../../../../src/components/screens/app/LoginScreen/LoginScreen.pageObject';
+import { LOGIN_COOKIE_APP_TOKEN } from '../../../../src/services/login/loginService';
 
 describe('/pages/app/login', () => {
   describe('when fill and submit a form login request', () => {
@@ -20,7 +21,7 @@ describe('/pages/app/login', () => {
       cy.wait('@userLogin').then((res) => {
         const { token } = res.response.body.data;
 
-        cy.getCookie('APP_TOKEN')
+        cy.getCookie(LOGIN_COOKIE_APP_TOKEN)
           .should('exist')
           .should('have.property', 'value', token);
       });
